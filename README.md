@@ -24,9 +24,9 @@ This repo is intentionally small. It contains the model architecture, lightweigh
 - No training code
 - No simulator code
 - No corpus
-- No AWS scripts
+- No infrastructure scripts
 - No benchmark harness
-- No internal project files
+- No unrelated project files
 
 ## Current Model
 
@@ -60,7 +60,7 @@ model = load_world_model(config, weights)
 model = model.cuda()
 ```
 
-The release repo does not vendor the training repo's fused Mamba/Triton backend. That keeps the public code clean and portable; it is not meant to be the fastest possible inference package.
+The release repo does not vendor the fused Mamba/Triton backend. That keeps the public code clean and portable; it is not meant to be the fastest possible inference package.
 
 ## Quick Start
 
@@ -98,4 +98,4 @@ Fields are hash-bucketed into learned embeddings, combined with token embeddings
 
 ## Status
 
-These are research checkpoints trained on synthetic 4X strategy-game traces. They are not official game integrations and are not packaged as production inference servers.
+These are research checkpoints trained on synthetic 4X strategy-game traces. They are packaged for inspection and lightweight loading, not production serving.
