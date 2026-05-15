@@ -81,7 +81,20 @@ Load the current world model:
 python examples/load_world_model.py
 ```
 
+That example reads `examples/example_inputs.json`, builds a `CanonicalState` and `CanonicalAction`, runs them through the state encoder/action encoder, and prints latent/head outputs.
+
 The model implementation is in `src/fourx_mamba/model.py`. It includes only the released architecture: canonical state/action dataclasses, state encoder, action encoder, Mamba-style SSM dynamics block, and scalar policy/reward/value heads.
+
+## State Encoder
+
+The released state encoder is wired into `MambaWorldModel`.
+
+It accepts two input channels:
+
+- `tokens`: integer tokens, clipped into the configured `token_vocab_size`
+- `fields`: structured entity fields with `entity_type`, `entity_id`, `field_name`, and `value`
+
+Fields are hash-bucketed into learned embeddings, combined with token embeddings, projected, and normalized into one latent vector per state.
 
 ## Status
 

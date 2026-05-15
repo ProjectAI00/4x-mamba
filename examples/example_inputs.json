@@ -1,0 +1,28 @@
+{
+  "state": {
+    "tokens": [101, 12, 44, 205, 17, 88],
+    "fields": [
+      {
+        "entity_type": "city",
+        "entity_id": "capital",
+        "field_name": "population",
+        "value": "3"
+      },
+      {
+        "entity_type": "unit",
+        "entity_id": "warrior_0",
+        "field_name": "hp",
+        "value": "10"
+      },
+      {
+        "entity_type": "unit",
+        "entity_id": "warrior_0",
+        "field_name": "tile",
+        "value": "2,3"
+      }
+    ]
+  },
+  "action": {
+    "tokens": [301, 22, 23]
+  }
+}
