@@ -45,11 +45,13 @@ The model predicts in latent space. It encodes a state and action, applies Mamba
 
 Hugging Face repo: `aimar00/4x-mamba`
 
+- Architecture: legacy Mamba2-style sequence model
+- Objective: next-token prediction
 - Parameters: `27,648,512`
 - Format: `model.safetensors`
 - Public artifact contains model weights only, not optimizer or scheduler state.
 
-The legacy checkpoint is kept for reference. The architecture code in this repo targets the current `MambaWorldModel`.
+The legacy checkpoint is the first model. It is kept for reference. The architecture code in this repo targets the current `MambaWorldModel`.
 
 ## PyTorch And CUDA
 
