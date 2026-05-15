@@ -9,6 +9,7 @@ This repository intentionally contains only the small public-facing code and doc
 
 ## What Is Included
 
+- Minimal `MambaWorldModel` architecture code
 - Minimal Python helper for downloading configs and weights from Hugging Face
 - Small examples for inspecting the released artifacts
 - No training code
@@ -50,6 +51,14 @@ This downloads the config and prints the model metadata. It does not download th
 ```bash
 python examples/download_weights.py aimar00/4x-mamba-world-model
 ```
+
+Load the current world model:
+
+```bash
+python examples/load_world_model.py
+```
+
+The model implementation is in `src/fourx_mamba/model.py`. It includes only the released architecture: canonical state/action dataclasses, state encoder, action encoder, Mamba-style SSM dynamics block, and scalar policy/reward/value heads.
 
 ## Status
 
