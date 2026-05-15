@@ -1,36 +1,36 @@
-# 4x Mamba
+# 4X Mamba
 
-Clean public release repo for the 4X strategy-game Mamba checkpoints.
+Clean public release repo for the 4X strategy-game Mamba world model.
 
-This repository intentionally contains only the small public-facing code and docs. The model weights live on Hugging Face:
+This repo is intentionally small. It contains the model architecture, lightweight loading helpers, and examples. The actual weights live on Hugging Face:
 
-- Legacy model: https://huggingface.co/aimar00/4x-mamba
 - Current world model: https://huggingface.co/aimar00/4x-mamba-world-model
+- Legacy checkpoint: https://huggingface.co/aimar00/4x-mamba
 
 ## What Is Included
 
-- Minimal `MambaWorldModel` architecture code
-- Minimal Python helper for downloading configs and weights from Hugging Face
-- Small examples for inspecting the released artifacts
+- `MambaWorldModel` architecture code
+- Canonical state/action dataclasses
+- Hash/token state encoder
+- Action token encoder
+- Mamba-style SSM dynamics block
+- Latent transition path
+- Policy, reward, and value heads
+- Hugging Face config/weights download helpers
+- Small load/inspect examples
+
+## What Is Not Included
+
 - No training code
 - No simulator code
 - No corpus
 - No AWS scripts
+- No benchmark harness
 - No internal project files
 
-## Models
+## Current Model
 
-### `aimar00/4x-mamba`
-
-Legacy Mamba-style checkpoint.
-
-- Parameters: `27,648,512`
-- Format: `model.safetensors`
-- Public artifact contains model weights only, not optimizer or scheduler state.
-
-### `aimar00/4x-mamba-world-model`
-
-Current 4X world model checkpoint.
+Hugging Face repo: `aimar00/4x-mamba-world-model`
 
 - Architecture: `MambaWorldModel`
 - Parameters: `28,709,251`
@@ -38,6 +38,29 @@ Current 4X world model checkpoint.
 - Layers: `8`
 - Max state tokens: `512`
 - Format: `model.safetensors`
+
+The model predicts in latent space. It encodes a state and action, applies Mamba-style SSM dynamics, predicts the next latent, and scores actions with policy/reward/value heads.
+
+## Legacy Checkpoint
+
+Hugging Face repo: `aimar00/4x-mamba`
+
+- Parameters: `27,648,512`
+- Format: `model.safetensors`
+- Public artifact contains model weights only, not optimizer or scheduler state.
+
+The legacy checkpoint is kept for reference. The architecture code in this repo targets the current `MambaWorldModel`.
+
+## PyTorch And CUDA
+
+The public implementation is ordinary PyTorch so it is easy to inspect and run. PyTorch can run it on CPU or CUDA depending on your local install:
+
+```python
+model = load_world_model(config, weights)
+model = model.cuda()
+```
+
+The release repo does not vendor the training repo's fused Mamba/Triton backend. That keeps the public code clean and portable; it is not meant to be the fastest possible inference package.
 
 ## Quick Start
 
